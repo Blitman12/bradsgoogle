@@ -1,23 +1,61 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState, useEffect } from "react";
+
+const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
 function App() {
+  const [search, setSearch] = useState("");
+  const [tempInfo, setTempInfo] = useState("");
+
+  useEffect(() => {
+    const weatherCall = async () => {
+      const res = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=Phoenix&units=imperial&appid=${API_KEY}`
+      );
+      const data = await res.json();
+      const tempData = data.main;
+      setTempInfo(tempData);
+    };
+    try {
+      weatherCall();
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <header>Coffee Search</header>
+
+      {/* Weather Display */}
+      <div className="weather-container">
+        <div className="weather-title">
+          <h2>Phoenix</h2>
+        </div>
+        <div className="weather-info">
+          {tempInfo && <p1>Current Temp: {tempInfo.temp}</p1>}
+          {tempInfo && <p1>Today`s High: {tempInfo.temp_max}</p1>}
+          {tempInfo && <p1>Today`s Low: {tempInfo.temp_min}</p1>}
+        </div>
+      </div>
+
+      {/* Search Bar */}
+      <section class="webdesigntuts-workshop">
+        <form action="http://google.com/search" method="get">
+          <input
+            type="search"
+            placeholder="What are you looking for?"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            name="q"
+            required
+            autofocus
+          />
+          <button type="submit" value="">
+            Search
+          </button>
+        </form>
+      </section>
     </div>
   );
 }

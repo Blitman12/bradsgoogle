@@ -40,7 +40,7 @@ function App() {
       </div>
 
       {/* Search Bar */}
-      <section class="webdesigntuts-workshop">
+      <div class="webdesigntuts-workshop">
         <form action="http://google.com/search" method="get">
           <input
             type="search"
@@ -55,7 +55,7 @@ function App() {
             Search
           </button>
         </form>
-      </section>
+      </div>
     </div>
   );
 }

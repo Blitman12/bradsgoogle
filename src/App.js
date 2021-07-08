@@ -41,7 +41,7 @@ function App() {
 
       {/* Search Bar */}
       <div class="webdesigntuts-workshop">
-        <form action="http://google.com/search" method="get">
+        <form action="http://google.com/search" method="get" autocomplete="off">
           <input
             type="search"
             placeholder="What are you looking for?"
